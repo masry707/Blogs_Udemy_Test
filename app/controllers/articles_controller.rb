@@ -13,7 +13,7 @@ class ArticlesController < ApplicationController
       flash[:success] = 'Article was created successfully!'
       redirect_to articles_path
     else
-      flash[:danger] = 'Article was not created'
+      flash.now[:danger] = 'Article was not created'
       render 'new'
     end
   end
