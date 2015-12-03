@@ -29,7 +29,7 @@ guard :rspec, cmd: "rspec" do
   dsl = Guard::RSpec::Dsl.new(self)
 
   # Feel free to open issues for suggestions and improvements
-
+  watch(%r{^spec/features/(.+)\.rb$}) { 'spec/features' }
   # RSpec files
   rspec = dsl.rspec
   watch(rspec.spec_helper) { rspec.spec_dir }
