@@ -3,7 +3,9 @@ require 'rails_helper'
 RSpec.feature 'Editing an article' do
 
   before do
-    @article = Article.create(title: 'first article', body: 'body of first article')
+    @john = User.create!(email: 'john@example.com', password: 'password')
+    login_as(@john)
+    @article = Article.create(title: 'first article', body: 'body of first article', user: @john)
   end
 
   scenario 'User updates an article' do
@@ -29,6 +31,8 @@ RSpec.feature 'Editing an article' do
 
     fill_in 'Title', with: ''
     fill_in 'Body', with: 'updated article body'
+
+    click_button 'Update Article'
 
     expect(page).to have_content('Article has not been updated')
     expect(current_path).to eq(article_path(@article))
